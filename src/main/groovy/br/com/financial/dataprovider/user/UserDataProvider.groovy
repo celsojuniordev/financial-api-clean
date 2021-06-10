@@ -1,6 +1,7 @@
 package br.com.financial.dataprovider.user
 
-
+import br.com.financial.core.user.User
+import br.com.financial.dataprovider.user.gateway.UserGateway
 import br.com.financial.dataprovider.user.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -12,24 +13,24 @@ import org.springframework.stereotype.Service
  */
 
 @Service
-class UserDataProvider implements br.com.financial.dataprovider.user.gateway.UserGateway {
+class UserDataProvider implements UserGateway {
 
     @Autowired
     UserRepository userRepository
 
     @Override
-    br.com.financial.core.user.User authenticate(String email, String password) {
-        br.com.financial.core.user.User user = userRepository.findByEmailAndPassword(email, password).toDomain()
+    User authenticate(String email, String password) {
+        User user = userRepository.findByEmailAndPassword(email, password).toDomain()
         user
     }
 
     @Override
-    br.com.financial.core.user.User save(br.com.financial.core.user.User user) {
+    User save(User user) {
         userRepository.save(user.toUserData()).toDomain()
     }
 
     @Override
-    Optional<br.com.financial.core.user.User> findById(Long id) {
-        userRepository.findById(id) as Optional<br.com.financial.core.user.User>
+    Optional<User> findById(Long id) {
+        userRepository.findById(id) as Optional<User>
     }
 }

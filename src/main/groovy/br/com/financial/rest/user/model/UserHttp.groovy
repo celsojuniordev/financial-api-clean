@@ -1,23 +1,17 @@
-package br.com.financial.dataprovider.user.model
+package br.com.financial.rest.user.model
 
 import br.com.financial.core.user.User
 import lombok.Data
 
-import javax.persistence.*
-
 /**
  * Created by user: Celso
  * Date: 09/06/2021
- * Time: 00:34
+ * Time: 22:36
  */
 
-@Entity
 @Data
-@Table(name = "user")
-class UserData {
+class UserHttp {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id
 
     String name
@@ -26,7 +20,7 @@ class UserData {
 
     String password
 
-    User toDomain() {
+    User toUser() {
         new User(id: this.id, name: this.name, email: this.email, password: this.password)
     }
 }

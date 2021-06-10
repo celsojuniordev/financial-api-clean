@@ -1,6 +1,6 @@
 package br.com.financial.core.user
 
-
+import br.com.financial.dataprovider.user.gateway.UserGateway
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
@@ -14,9 +14,13 @@ import org.springframework.stereotype.Component
 class UserUseCase {
 
     @Autowired
-    br.com.financial.dataprovider.user.gateway.UserGateway userGateway
+    UserGateway userGateway
 
     User authenticate(String email, String password) {
         userGateway.authenticate(email, password)
+    }
+
+    User save(User user) {
+        userGateway.save(user)
     }
 }

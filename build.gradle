@@ -26,6 +26,10 @@ dependencies {
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	//hibernate-validator
+	implementation group: 'org.hibernate.validator', name: 'hibernate-validator', version: '6.2.0.Final'
+
 }
 
 test {

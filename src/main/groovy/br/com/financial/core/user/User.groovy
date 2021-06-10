@@ -1,6 +1,7 @@
 package br.com.financial.core.user
 
 import br.com.financial.dataprovider.user.model.UserData
+import br.com.financial.rest.user.model.UserHttp
 import lombok.Data
 
 /**
@@ -22,5 +23,9 @@ class User {
 
     UserData toUserData() {
         new UserData(id: this.id, name: this.name, email: this.email, password: this.password)
+    }
+
+    UserHttp toUserHttp() {
+        new UserHttp(id: this.id, name: this.name, email: this.email, password: this.password)
     }
 }
