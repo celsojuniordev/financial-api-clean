@@ -1,6 +1,7 @@
 package br.com.financial.dataprovider.user.model
 
 import br.com.financial.core.user.User
+import br.com.financial.dataprovider.Timestampable
 import lombok.Data
 
 import javax.persistence.*
@@ -14,7 +15,7 @@ import javax.persistence.*
 @Entity
 @Data
 @Table(name = "user")
-class UserData {
+class UserData extends Timestampable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

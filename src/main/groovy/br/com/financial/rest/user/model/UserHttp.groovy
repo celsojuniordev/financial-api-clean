@@ -40,8 +40,8 @@ class UserHttp {
 
     Map marshall() {
         Map data = [
-                id: this.id,
-                name: this.name,
+                id   : this.id,
+                name : this.name,
                 email: this.email
         ]
 
