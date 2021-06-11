@@ -29,11 +29,16 @@ class UserController {
 
     @PostMapping
     ResponseEntity save(@RequestBody @Valid UserHttp userHttp) {
-        ResponseEntity.status(HttpStatus.CREATED).body(businessUser.save(userHttp.toUser()).toUserHttp())
+        ResponseEntity.status(HttpStatus.CREATED).body(businessUser.save(userHttp.toUser()).toUserHttp().marshall())
     }
 
     @GetMapping("/{id}")
     ResponseEntity findById(@PathVariable("id") Long id) {
-        ResponseEntity.ok(businessUser.findById(id).toUserHttp())
+        ResponseEntity.ok(businessUser.findById(id).toUserHttp().marshall())
+    }
+
+    @PostMapping("/login")
+    ResponseEntity login(@RequestBody UserHttp userHttp) {
+        ResponseEntity.ok(businessUser.authenticate(userHttp.email, userHttp.password).toUserHttp().marshall())
     }
 }

@@ -1,6 +1,7 @@
 package br.com.financial.rest.user.model
 
 import br.com.financial.core.user.User
+import br.com.financial.core.util.MapUtils
 import com.fasterxml.jackson.annotation.JsonIgnore
 import lombok.Data
 import lombok.Getter
@@ -35,5 +36,15 @@ class UserHttp {
 
     User toUser() {
         new User(id: this.id, name: this.name, email: this.email, password: this.password)
+    }
+
+    Map marshall() {
+        Map data = [
+                id: this.id,
+                name: this.name,
+                email: this.email
+        ]
+
+        MapUtils.clearNullValues(data) as Map
     }
 }
