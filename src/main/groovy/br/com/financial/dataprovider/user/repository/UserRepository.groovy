@@ -11,6 +11,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface UserRepository extends JpaRepository<UserData, Long> {
 
-    UserData findByEmailAndPassword(String email, String password)
-
+    findByEmailAndPassword(String email, String password)
 }

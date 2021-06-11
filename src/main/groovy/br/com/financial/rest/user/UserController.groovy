@@ -5,6 +5,8 @@ import br.com.financial.rest.user.model.UserHttp
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -28,5 +30,10 @@ class UserController {
     @PostMapping
     ResponseEntity save(@RequestBody @Valid UserHttp userHttp) {
         ResponseEntity.status(HttpStatus.CREATED).body(businessUser.save(userHttp.toUser()).toUserHttp())
+    }
+
+    @GetMapping("/{id}")
+    ResponseEntity findById(@PathVariable("id") Long id) {
+        ResponseEntity.ok(businessUser.findById(id).toUserHttp())
     }
 }

@@ -30,7 +30,9 @@ class UserDataProvider implements UserGateway {
     }
 
     @Override
-    Optional<User> findById(Long id) {
-        userRepository.findById(id) as Optional<User>
+    User findById(Long id) {
+        User user = null
+        userRepository.findById(id).ifPresent(userData -> user = userData.toDomain())
+        user
     }
 }
