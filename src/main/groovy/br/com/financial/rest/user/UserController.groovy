@@ -25,14 +25,8 @@ class UserController {
     @Autowired
     UserUseCase businessUser
 
-
     @PostMapping
     ResponseEntity save(@RequestBody @Valid UserHttp userHttp) {
-
-        try {
-            ResponseEntity.status(HttpStatus.CREATED).body(businessUser.save(userHttp.toUser()).toUserHttp())
-        } catch(Exception e) {
-            ResponseEntity.badRequest().body(e.getMessage())
-        }
+        ResponseEntity.status(HttpStatus.CREATED).body(businessUser.save(userHttp.toUser()).toUserHttp())
     }
 }
