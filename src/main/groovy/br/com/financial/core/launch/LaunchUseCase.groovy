@@ -43,6 +43,13 @@ class LaunchUseCase {
         launchGateway.save(launch)
     }
 
+    List<Launch> findAll(String description, Integer month, Integer year, Long userId) {
+        Launch launchFilter = new Launch(description: description, month: month, year: year, user: [id: userId])
+        launchValidations(launchFilter, null)
+
+        launchGateway.findAll(launchFilter)
+    }
+
     private void launchValidations(Launch launch, action) {
         if(!launch && action == "update"){
             throw new NotFoundException("Lançamento não encontrado")

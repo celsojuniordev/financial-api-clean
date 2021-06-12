@@ -1,11 +1,12 @@
 package br.com.financial.dataprovider.launch
 
 import br.com.financial.core.launch.Launch
-import br.com.financial.core.user.User
 import br.com.financial.dataprovider.launch.gateway.LaunchGateway
 import br.com.financial.dataprovider.launch.model.LaunchData
 import br.com.financial.dataprovider.launch.repository.LaunchRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Example
+import org.springframework.data.domain.ExampleMatcher
 import org.springframework.stereotype.Service
 
 /**
@@ -32,7 +33,12 @@ class LaunchDataProvider implements LaunchGateway {
 
     @Override
     List<Launch> findAll(Launch launchFilter) {
-        return null
+        Example example = Example.of(launchFilter.toData(),
+                ExampleMatcher.matching()
+                        .withIgnoreCase()
+                        .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING))
+        List<Launch> launchs = launchRepository.findAll(example).collect { it.toDomain() }
+        launchs
     }
 
     @Override

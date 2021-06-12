@@ -62,7 +62,7 @@ class LaunchHttp {
                 description : this.description,
                 month       : this.month,
                 year        : this.year,
-                user        : [id: this.user.toUser().id],
+                user        : [id: this.user.toUser().id, name: this.user.toUser().name],
                 value       : this.value,
                 type        : this.type,
                 status      : this.status,
