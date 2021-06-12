@@ -41,7 +41,6 @@ class LaunchHttp {
     @NotBlank(message = "Tipo é obrigatório")
     String type
 
-    @NotBlank(message = "Status é obrigatório")
     String status
 
     Date dateCreated
@@ -63,7 +62,7 @@ class LaunchHttp {
                 description : this.description,
                 month       : this.month,
                 year        : this.year,
-                user        : [id: this.user.toUser().id, name: this.user.toUser().name],
+                user        : [id: this.user.toUser().id],
                 value       : this.value,
                 type        : this.type,
                 status      : this.status,

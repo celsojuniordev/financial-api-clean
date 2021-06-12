@@ -1,6 +1,7 @@
 package br.com.financial.core.launch
 
 import br.com.financial.core.exception.NotFoundException
+import br.com.financial.core.exception.UnprocessableEntityException
 import br.com.financial.dataprovider.launch.gateway.LaunchGateway
 import br.com.financial.dataprovider.user.gateway.UserGateway
 import org.springframework.beans.factory.annotation.Autowired
@@ -23,11 +24,15 @@ class LaunchUseCase {
 
     Launch save(Launch launch) {
 
-        if(!launch.user.id || !userGateway.findById(launch.user.id)) {
-            throw new NotFoundException("Usuário não encontrado")
-        }
+        launchValidations(launch)
 
         launch.status = Launch.LaunchStatus.PENDENTE
         launchGateway.save(launch)
+    }
+
+    private void launchValidations(Launch launch) {
+        if (!launch.user.id || !userGateway.findById(launch.user.id)) {
+            throw new NotFoundException("Usuário não encontrado")
+        }
     }
 }
