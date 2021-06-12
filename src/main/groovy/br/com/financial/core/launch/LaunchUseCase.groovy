@@ -30,6 +30,10 @@ class LaunchUseCase {
         launchGateway.save(launch)
     }
 
+    Map getBalanceByUser(Long id) {
+        [value: launchGateway.getBalanceByUser(id)]
+    }
+
     private void launchValidations(Launch launch) {
         if (!launch.user.id || !userGateway.findById(launch.user.id)) {
             throw new NotFoundException("Usuário não encontrado")

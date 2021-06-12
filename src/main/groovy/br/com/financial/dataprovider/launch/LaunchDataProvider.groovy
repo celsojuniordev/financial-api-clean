@@ -56,6 +56,9 @@ class LaunchDataProvider implements LaunchGateway {
 
     @Override
     Long getBalanceByUser(Long id) {
-        return null
+        Long incoming = launchRepository.sumValuesUserByType(id, "RECEITA") ?: 0
+        Long expense = launchRepository.sumValuesUserByType(id, "DESPESA") ?: 0
+
+        incoming - expense
     }
 }

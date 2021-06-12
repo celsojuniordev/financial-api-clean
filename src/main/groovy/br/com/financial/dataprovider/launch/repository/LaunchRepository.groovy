@@ -18,5 +18,5 @@ interface LaunchRepository extends JpaRepository<LaunchData, Long> {
                     WHERE u.id = :userId
                     AND l.type = :type 
                     GROUP BY u""")
-    Long getBalanceByUser(@Param("userId") Long userId, @Param("type") String type)
+    Long sumValuesUserByType(@Param("userId") Long userId, @Param("type") String type)
 }
