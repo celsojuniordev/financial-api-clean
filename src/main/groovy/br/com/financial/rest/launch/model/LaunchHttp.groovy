@@ -9,8 +9,11 @@ import lombok.Data
 
 import javax.persistence.EnumType
 import javax.persistence.Enumerated
+import javax.validation.constraints.Max
+import javax.validation.constraints.Min
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
+import javax.validation.constraints.Size
 
 /**
  * Created by user: Celso
@@ -27,9 +30,13 @@ class LaunchHttp {
     String description
 
     @NotNull(message = "Mês é obrigatório")
+    @Min(value = 1L, message = "Mês inválido")
+    @Max(value = 12L, message = "Mês inválido")
     Integer month
 
     @NotNull(message = "Ano é obrigatório")
+    @Min(value = 1990L, message = "Ano inválido")
+    @Max(value = 2099L, message = "Ano inválido")
     Integer year
 
     @NotNull(message = "Usuário é obrigatório")
