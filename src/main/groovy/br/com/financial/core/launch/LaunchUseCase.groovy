@@ -50,8 +50,20 @@ class LaunchUseCase {
         launchGateway.findAll(launchFilter)
     }
 
+    Launch findById(Long id) {
+        Launch launch = launchGateway.findById(id)
+        launchValidations(launch, "update")
+        launch
+    }
+
+    void delete(Long id) {
+        Launch launch = launchGateway.findById(id)
+        launchValidations(launch, "delete")
+        launchGateway.delete(launch)
+    }
+
     private void launchValidations(Launch launch, action) {
-        if(!launch && action == "update"){
+        if(!launch && (action == "update" || action == "delete")){
             throw new NotFoundException("Lançamento não encontrado")
         }
 

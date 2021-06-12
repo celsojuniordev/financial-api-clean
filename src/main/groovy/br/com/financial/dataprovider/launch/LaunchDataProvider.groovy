@@ -28,7 +28,7 @@ class LaunchDataProvider implements LaunchGateway {
 
     @Override
     void delete(Launch launch) {
-
+        launchRepository.delete(launch.toData())
     }
 
     @Override

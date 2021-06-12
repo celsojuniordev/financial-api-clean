@@ -6,6 +6,7 @@ import org.apache.coyote.Response
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -46,5 +47,16 @@ class LaunchController {
                         @RequestParam(value = "year", required = false) Integer year,
                         @RequestParam("userId") Long userId) {
         ResponseEntity.ok(launchUseCase.findAll(description, month, year, userId).collect { it.toHttp().marshall() })
+    }
+
+    @DeleteMapping("/{id}")
+    ResponseEntity delete(@PathVariable("id") Long id) {
+        launchUseCase.delete(id)
+        ResponseEntity.noContent().build()
+    }
+
+    @GetMapping("/{id}")
+    ResponseEntity findById(@PathVariable Long id) {
+        ResponseEntity.ok(launchUseCase.findById(id).toHttp().marshall())
     }
 }
