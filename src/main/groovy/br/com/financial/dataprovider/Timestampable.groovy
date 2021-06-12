@@ -17,5 +17,4 @@ abstract class Timestampable {
     protected void prePersist() {
         dateCreated = new Date()
     }
-
 }

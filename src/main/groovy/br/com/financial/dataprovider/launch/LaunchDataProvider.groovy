@@ -1,6 +1,7 @@
 package br.com.financial.dataprovider.launch
 
 import br.com.financial.core.launch.Launch
+import br.com.financial.core.user.User
 import br.com.financial.dataprovider.launch.gateway.LaunchGateway
 import br.com.financial.dataprovider.launch.model.LaunchData
 import br.com.financial.dataprovider.launch.repository.LaunchRepository
@@ -25,11 +26,6 @@ class LaunchDataProvider implements LaunchGateway {
     }
 
     @Override
-    Launch update(Launch launch) {
-        return null
-    }
-
-    @Override
     void delete(Launch launch) {
 
     }
@@ -51,7 +47,9 @@ class LaunchDataProvider implements LaunchGateway {
 
     @Override
     Launch findById(Long id) {
-        return null
+        Launch launch = null
+        launchRepository.findById(id).ifPresent(launchData -> launch = launchData.toDomain())
+        launch
     }
 
     @Override

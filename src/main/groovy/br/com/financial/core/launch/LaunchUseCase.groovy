@@ -2,6 +2,7 @@ package br.com.financial.core.launch
 
 import br.com.financial.core.exception.NotFoundException
 import br.com.financial.core.exception.UnprocessableEntityException
+import br.com.financial.core.user.User
 import br.com.financial.dataprovider.launch.gateway.LaunchGateway
 import br.com.financial.dataprovider.user.gateway.UserGateway
 import org.springframework.beans.factory.annotation.Autowired
@@ -23,8 +24,7 @@ class LaunchUseCase {
     UserGateway userGateway
 
     Launch save(Launch launch) {
-
-        launchValidations(launch)
+        launchValidations(launch, "create")
 
         launch.status = Launch.LaunchStatus.PENDENTE
         launchGateway.save(launch)
@@ -34,7 +34,20 @@ class LaunchUseCase {
         [value: launchGateway.getBalanceByUser(id)]
     }
 
-    private void launchValidations(Launch launch) {
+    Launch update(Long id, Launch launch) {
+        Launch oldLaunch = launchGateway.findById(id)
+        launchValidations(oldLaunch, "update")
+
+        launch.id = oldLaunch.id
+        launch.dateCreated = oldLaunch.dateCreated
+        launchGateway.save(launch)
+    }
+
+    private void launchValidations(Launch launch, action) {
+        if(!launch && action == "update"){
+            throw new NotFoundException("Lançamento não encontrado")
+        }
+
         if (!launch.user.id || !userGateway.findById(launch.user.id)) {
             throw new NotFoundException("Usuário não encontrado")
         }

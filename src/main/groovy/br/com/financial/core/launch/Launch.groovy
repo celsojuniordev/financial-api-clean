@@ -56,7 +56,8 @@ class Launch {
                 user        : this.user.toUserData(),
                 value       : this.value,
                 type        : this.type,
-                status      : this.status
+                status      : this.status,
+                dateCreated: this.dateCreated
         )
     }
 

@@ -12,8 +12,6 @@ interface LaunchGateway {
 
     Launch save(Launch launch)
 
-    Launch update(Launch launch)
-
     void delete(Launch launch)
 
     List<Launch> findAll(Launch launchFilter)
