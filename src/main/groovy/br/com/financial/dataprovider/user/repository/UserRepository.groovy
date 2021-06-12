@@ -12,4 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 interface UserRepository extends JpaRepository<UserData, Long> {
 
     findByEmailAndPassword(String email, String password)
+
+    Integer countByEmail(String email)
 }

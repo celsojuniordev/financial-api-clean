@@ -15,4 +15,6 @@ interface UserGateway {
     User save(User user)
 
     User findById(Long id)
+
+    Integer validateEmail(String email)
 }

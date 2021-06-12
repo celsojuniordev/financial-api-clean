@@ -35,4 +35,9 @@ class UserDataProvider implements UserGateway {
         userRepository.findById(id).ifPresent(userData -> user = userData.toDomain())
         user
     }
+
+    @Override
+    Integer validateEmail(String email) {
+        userRepository.countByEmail(email)
+    }
 }

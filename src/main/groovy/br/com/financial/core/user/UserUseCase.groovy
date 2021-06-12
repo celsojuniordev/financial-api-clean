@@ -1,6 +1,7 @@
 package br.com.financial.core.user
 
 import br.com.financial.core.exception.NotFoundException
+import br.com.financial.core.exception.UnprocessableEntityException
 import br.com.financial.core.util.StringUtils
 import br.com.financial.dataprovider.user.gateway.UserGateway
 import org.springframework.beans.factory.annotation.Autowired
@@ -24,6 +25,9 @@ class UserUseCase {
 
     User save(User user) {
         user.password = StringUtils.hashPassword(user.password)
+        if(validateEmail(user.email) > 0) {
+            throw new UnprocessableEntityException("Email já existe")
+        }
         userGateway.save(user)
     }
 
@@ -33,5 +37,9 @@ class UserUseCase {
             throw new NotFoundException("Usuário não encontrado")
         }
         user
+    }
+
+    Integer validateEmail(String email) {
+        userGateway.validateEmail(email)
     }
 }
